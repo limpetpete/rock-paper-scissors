@@ -19,9 +19,6 @@ function getComputerChoice() {
     }
 }
 
-getComputerChoice();
-console.log(compChoice);
-console.log(playerChoice);
 
 //Capitalise first letter of player choice
 function capitaliseChoice(string) {
@@ -37,30 +34,49 @@ function whoWins(compChoice, playerChoice) {
     } else if (compChoice === "Rock") {
         if (playerChoice === "Scissors") {
             console.log(`Ha, I win! Rock beats scissors. Let's play again.`);
+            compScore += 1;
         } else {
             console.log(`Boo, you win! Paper beats rock. Let's play again.`);
+            playerScore += 1;
         }
     } else if (compChoice === "Scissors") {
         if (playerChoice === "Rock") {
             console.log(`Boo, you win! Rock beats scissors. Let's play again.`);
+            playerScore += 1;
         } else {
             console.log(`Ha, I win! Scissors beats paper. Let's play again.`);
+            compScore += 1;
         }
     } else if (compChoice === "Paper") {
         if (playerChoice === "Rock") {
             console.log(`Ha, I win! Paper beats rock. Let's play again.`);
+            compScore += 1;
         } else {
             console.log(`Boo, you win! Scissors beats paper. Let's play again.`);
+            playerScore += 1;
         }
     }
 }
 
 //Play a full game of RPS and then start it all again
 function playRPS() {
-    userSelects();
-    getComputerChoice();
-    whoWins(compChoice, playerChoice);
-    playRPS();
+    playerScore = 0;
+    compScore = 0;
+    i = 1;
+    while (i < 6) {
+        console.log(`Round ${i}. The score is ${playerScore}-${compScore}`);
+        userSelects();
+        getComputerChoice();
+        whoWins(compChoice, playerChoice);
+        i++;
+    }
+    if (compScore === playerScore) {
+        console.log(`Game over. It's a draw! We both got ${compScore}`);
+    } else if (compScore > playerScore) {
+        console.log(`Game over. I beat you by ${compScore} to ${playerScore}.`);
+    } else {
+        console.log(`Game over. You beat me by ${playerScore} to ${compScore}.`);
+    }
 }
 
 playRPS();
